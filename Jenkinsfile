@@ -12,9 +12,7 @@ pipeline {
         stage('Setup Flutter') {
             steps {
                 timeout(time: 5, unit: 'MINUTES'){
-                    sh 'rm -rf flutter'
-					sh 'git clone https://github.com/flutter/flutter.git -b stable'
-					sh 'export PATH="$PATH:`pwd`/flutter/bin"'
+                    sh 'flutter --version'
 					sh 'flutter precache'
                 }
             }

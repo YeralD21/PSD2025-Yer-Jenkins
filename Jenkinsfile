@@ -22,21 +22,21 @@ pipeline {
         stage('Build') {
             steps {
                 timeout(time: 8, unit: 'MINUTES'){
-                    // Navegar al directorio del proyecto Flutter y obtener dependencias
-                    dir('capachica-app') { // Asume que 'capachica-app' es el subdirectorio de tu proyecto Flutter
-                        sh 'export PATH="$PATH:`pwd`/../flutter/bin"' // Asegúrate de que Flutter esté en el PATH
+                    dir('capachica-app') {
+                        sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
                         sh 'flutter pub get'
-                        sh 'flutter build apk --release' // O 'flutter build ios --release' si es para iOS
+                        sh 'flutter build apk --release'
                     }
                 }
             }
         }
-        stage('Test') {
+        stage('Test & Coverage') {
             steps {
                 timeout(time: 10, unit: 'MINUTES'){
                     dir('capachica-app') {
                         sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
-                        sh 'flutter test'
+                        // Ejecuta los tests y genera el reporte de cobertura
+                        sh 'flutter test --coverage'
                     }
                 }
             }
@@ -46,13 +46,13 @@ pipeline {
                 timeout(time: 4, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
                         dir('capachica-app') {
-                            // Este comando puede necesitar ajustes dependiendo de cómo integres SonarQube con Flutter.
-                            // Por ejemplo, podrías usar un analizador de SonarCloud para Dart/Flutter.
+                            // Ejecuta el análisis SonarQube incluyendo el reporte de cobertura
                             sh 'sonar-scanner \
                                 -Dsonar.projectKey=capachica-app \
                                 -Dsonar.sources=lib \
                                 -Dsonar.host.url=$SONAR_HOST_URL \
-                                -Dsonar.login=$SONAR_AUTH_TOKEN'
+                                -Dsonar.login=$SONAR_AUTH_TOKEN \
+                                -Dsonar.dart.coverage.reportPaths=coverage/lcov.info'
                         }
                     }
                 }
@@ -72,8 +72,8 @@ pipeline {
                     dir('capachica-app') {
                         sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
                         echo "Aquí iría el comando para desplegar tu aplicación Flutter. Por ejemplo:"
-                        echo "flutter build appbundle --release" // Para subir a Google Play Store
-                        echo "flutter build ipa --release" // Para subir a Apple App Store (requiere macOS)
+                        echo "flutter build appbundle --release"
+                        echo "flutter build ipa --release"
                         // O si despliegas a un servidor:
                         // echo "scp build/app/outputs/flutter-apk/app-release.apk user@your-server:/path/to/deploy"
                     }

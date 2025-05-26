@@ -22,8 +22,8 @@ pipeline {
                 timeout(time: 8, unit: 'MINUTES'){
                     dir('capachica-app') {
                         sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
-                        sh 'flutter pub get'
-                        sh 'flutter build apk --release'
+                        sh '/opt/flutter/bin/flutter pub get'
+						sh '/opt/flutter/bin/flutter build apk --release'
                     }
                 }
             }

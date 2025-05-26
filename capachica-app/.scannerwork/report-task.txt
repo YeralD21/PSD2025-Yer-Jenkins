@@ -1,0 +1,6 @@
+projectKey=capachica-app
+serverUrl=http://localhost:9000
+serverVersion=25.5.0.107428
+dashboardUrl=http://localhost:9000/dashboard?id=capachica-app
+ceTaskId=8a1dca26-39cc-41e6-96c0-8eadbae30347
+ceTaskUrl=http://localhost:9000/api/ce/task?id=8a1dca26-39cc-41e6-96c0-8eadbae30347

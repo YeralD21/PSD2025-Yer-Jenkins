@@ -12,10 +12,10 @@ pipeline {
         stage('Setup Flutter') {
             steps {
                 timeout(time: 5, unit: 'MINUTES'){
-                    // Descargar e instalar Flutter (puedes ajustar la versión si es necesario)
-                    sh 'git clone https://github.com/flutter/flutter.git -b stable'
-                    sh 'export PATH="$PATH:`pwd`/flutter/bin"'
-                    sh 'flutter precache' // Descargar los artefactos necesarios para el SDK
+                    sh 'rm -rf flutter'
+					sh 'git clone https://github.com/flutter/flutter.git -b stable'
+					sh 'export PATH="$PATH:`pwd`/flutter/bin"'
+					sh 'flutter precache'
                 }
             }
         }

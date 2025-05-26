@@ -33,23 +33,26 @@ class _GeneralHomeScreenState extends State<GeneralHomeScreen> with SingleTicker
       setState(() {}); // Para que se reconstruya y cambie el color del icono
     });
 
-    // Carga inicial de paquetes turísticos
-    final paqueteProvider = Provider.of<PaqueteTuristicoProvider>(context, listen: false);
-    if (paqueteProvider.paquetes.isEmpty && !paqueteProvider.isLoading) {
-      paqueteProvider.fetchPaquetes();
-    }
+    // Carga inicial de datos usando Future.microtask
+    Future.microtask(() {
+      // Carga inicial de paquetes turísticos
+      final paqueteProvider = Provider.of<PaqueteTuristicoProvider>(context, listen: false);
+      if (paqueteProvider.paquetes.isEmpty && !paqueteProvider.isLoading) {
+        paqueteProvider.fetchPaquetes();
+      }
 
-    // Carga inicial de lugares turísticos
-    final lugarProvider = Provider.of<LugarTuristicoProvider>(context, listen: false);
-    if (lugarProvider.lugares.isEmpty && !lugarProvider.isLoading) {
-      lugarProvider.fetchLugares();
-    }
+      // Carga inicial de lugares turísticos
+      final lugarProvider = Provider.of<LugarTuristicoProvider>(context, listen: false);
+      if (lugarProvider.lugares.isEmpty && !lugarProvider.isLoading) {
+        lugarProvider.fetchLugares();
+      }
 
-    // Carga inicial de emprendimientos
-    final emprendimientoProvider = Provider.of<EmprendimientoProvider>(context, listen: false);
-    if (emprendimientoProvider.emprendimientos.isEmpty && !emprendimientoProvider.isLoading) {
-      emprendimientoProvider.fetchEmprendimientos();
-    }
+      // Carga inicial de emprendimientos
+      final emprendimientoProvider = Provider.of<EmprendimientoProvider>(context, listen: false);
+      if (emprendimientoProvider.emprendimientos.isEmpty && !emprendimientoProvider.isLoading) {
+        emprendimientoProvider.fetchEmprendimientos();
+      }
+    });
   }
 
   @override

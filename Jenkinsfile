@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        // No se necesitan herramientas de Maven para Flutter
-    }
-
     stages {
         stage('Clone') {
             steps {
@@ -72,7 +68,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-			    timeout(time: 8, unit: 'MINUTES'){
+                timeout(time: 8, unit: 'MINUTES'){
                     dir('capachica-app') {
                         sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
                         echo "Aquí iría el comando para desplegar tu aplicación Flutter. Por ejemplo:"
@@ -81,7 +77,7 @@ pipeline {
                         // O si despliegas a un servidor:
                         // echo "scp build/app/outputs/flutter-apk/app-release.apk user@your-server:/path/to/deploy"
                     }
-                }			
+                }           
             }
         }
     }

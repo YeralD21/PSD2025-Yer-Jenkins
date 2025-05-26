@@ -12,8 +12,8 @@ pipeline {
         stage('Setup Flutter') {
             steps {
                 timeout(time: 5, unit: 'MINUTES'){
-                    sh 'flutter --version'
-					sh 'flutter precache'
+                    sh '/opt/flutter/bin/flutter --version'
+					sh '/opt/flutter/bin/flutter precache'
                 }
             }
         }

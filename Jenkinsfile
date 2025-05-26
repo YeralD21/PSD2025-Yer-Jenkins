@@ -47,12 +47,7 @@ pipeline {
                     withSonarQubeEnv('sonarqube'){
                         dir('capachica-app') {
                             // Ejecuta el análisis SonarQube incluyendo el reporte de cobertura
-                            sh 'sonar-scanner \
-                                -Dsonar.projectKey=capachica-app \
-                                -Dsonar.sources=lib \
-                                -Dsonar.host.url=$SONAR_HOST_URL \
-                                -Dsonar.login=$SONAR_AUTH_TOKEN \
-                                -Dsonar.dart.coverage.reportPaths=coverage/lcov.info'
+                            sh 'sonar-scanner'
                         }
                     }
                 }

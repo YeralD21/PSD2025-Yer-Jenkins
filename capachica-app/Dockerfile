@@ -17,11 +17,11 @@ ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/plat
 
 # Instala algunos componentes del SDK (puedes agregar más si necesitas)
 RUN yes | sdkmanager --licenses
-RUN sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+RUN sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;27.0.12077973"
 
 # (Opcional) Instala Flutter
 ENV FLUTTER_HOME=/opt/flutter
-RUN wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.19.6-stable.tar.xz -O /tmp/flutter.tar.xz && \
+RUN wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.32.1-stable.tar.xz -O /tmp/flutter.tar.xz && \
     tar xf /tmp/flutter.tar.xz -C /opt && \
     rm /tmp/flutter.tar.xz
 ENV PATH=$PATH:$FLUTTER_HOME/bin

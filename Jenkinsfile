@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
-                timeout(time: 4, unit: 'MINUTES'){
+                timeout(time: 10, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
                         dir('capachica-app') {
                             // Ejecuta el análisis SonarQube incluyendo el reporte de cobertura

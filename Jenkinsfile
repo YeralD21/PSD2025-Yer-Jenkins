@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                timeout(time: 8, unit: 'MINUTES'){
+                timeout(time: 20, unit: 'MINUTES'){
                     dir('capachica-app') {
                         sh 'export PATH="$PATH:`pwd`/../flutter/bin"'
                         sh '/opt/flutter/bin/flutter pub get'
